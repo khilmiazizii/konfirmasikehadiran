@@ -193,7 +193,7 @@
                 <h3 class="text-lg font-bold text-brand-accent flex items-center gap-2">
                     <i class="ph-fill ph-wallet text-2xl"></i> Kas Panitia
                 </h3>
-                <p class="text-sm text-gray-400 leading-relaxed">Scan QRIS di bawah ini untuk kas kegiatan. <strong class="text-brand-accent">Bayar seikhlasnya!</strong> Jika sudah, silakan upload bukti transfernya.</p>
+                <p class="text-sm text-gray-400 leading-relaxed">Scan QRIS di bawah ini untuk membantu kas kegiatan. <strong class="text-brand-accent">Seikhlasnya!</strong> Jika sudah, silakan upload bukti transfernya.</p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center bg-brand-darker p-5 rounded-3xl border border-brand-border">
                     <!-- QRIS Asli -->
@@ -202,14 +202,14 @@
                         <span class="text-[10px] font-extrabold text-gray-800 mb-2 text-center leading-tight uppercase">MOHAMMAD KHILMI AZIZI,<br>DIGITAL & KREATIF</span>
                         
                         <!-- Pastikan gambar QRIS Anda diberi nama "qris-fesbud.jpg" dan ditaruh di folder yang sama -->
-                        <img src="qris-fesbud.jpg" alt="QRIS Kas Fesbud" class="w-full max-w-[160px] h-auto object-contain rounded-lg border border-gray-100 p-1" onerror="this.onerror=null; this.src='https://quickchart.io/qr?text=00020101021126610014COM.GO-JEK.WWW01189360091434111889150210G4111889150303UMI51440014ID.CO.QRIS.WWW0215ID10265039027710303UMI5204899953033605802ID5925MOHAMMAD%20KHILMI%20AZIZI%2C%20Di6006GRESIK61056115562070703A0163048598&size=300&margin=0'; document.getElementById('dl-qris').href=this.src;">
+                        <img src="qris-fesbud.jpg" alt="QRIS Kas Fesbud" class="w-full max-w-[160px] h-auto object-contain rounded-lg border border-gray-100 p-1" onerror="this.onerror=null; this.src='https://quickchart.io/qr?text=00020101021126610014COM.GO-JEK.WWW01189360091434111889150210G4111889150303UMI51440014ID.CO.QRIS.WWW0215ID10265039027710303UMI5204899953033605802ID5925MOHAMMAD%20KHILMI%20AZIZI%2C%20Di6006GRESIK61056115562070703A0163048598&size=300&margin=0';">
                         
                         <span class="text-[9px] font-bold text-gray-500 mt-1 mb-3 text-center leading-tight">NMID: ID1026503902771</span>
                         
                         <!-- Tombol Download -->
-                        <a href="qris-fesbud.jpg" id="dl-qris" download="QRIS_Fesbud_Gresik.jpg" class="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-100 hover:bg-brand-accent text-gray-700 hover:text-brand-dark rounded-xl text-xs font-bold transition-all border border-gray-200">
+                        <button type="button" onclick="downloadQRIS(event)" class="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-100 hover:bg-brand-accent text-gray-700 hover:text-brand-dark rounded-xl text-xs font-bold transition-all border border-gray-200">
                             <i class="ph-bold ph-download-simple text-sm"></i> Download QRIS
-                        </a>
+                        </button>
                     </div>
 
                     <!-- File Upload -->
@@ -280,6 +280,36 @@
         let fileBase64 = null;
         let fileMimeType = null;
         let originalFileName = null;
+
+        // Fungsi Paksa Download QRIS
+        async function downloadQRIS(e) {
+            e.preventDefault();
+            const imgElement = document.querySelector('img[alt="QRIS Kas Fesbud"]');
+            const imgSrc = imgElement.src;
+            
+            try {
+                // Mengambil data gambar dan mengubahnya jadi objek Blob
+                const response = await fetch(imgSrc);
+                const blob = await response.blob();
+                
+                // Membuat URL sementara untuk file hasil download
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'QRIS_Fesbud_Gresik.jpg';
+                
+                // Memicu klik download
+                document.body.appendChild(link);
+                link.click();
+                
+                // Membersihkan
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+            } catch (err) {
+                // Fallback jika browser memblokir (CORS), buka di tab baru
+                window.open(imgSrc, '_blank');
+            }
+        }
 
         function toggleReason() {
             const container = document.getElementById('reasonContainer');
