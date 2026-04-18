@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konfirmasi Kehadiran Festival Budaya Gresik</title>
+    <link rel="icon" href="LOGOFESBUD.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -84,7 +85,7 @@
             <div class="flex items-start gap-4 mb-6">
                 <div class="w-[70px] h-[70px] shrink-0 rounded-full border-[3px] border-brand-accent bg-[#8aa436] flex items-center justify-center text-white font-bold text-xs text-center leading-tight shadow-lg overflow-hidden">
                     <!-- Pastikan file foto logo Anda bernama "logo.png" dan berada di folder yang sama -->
-                    <img src="LOGOFESBUD1.png" alt="Logo Fesbud" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=FB&background=8aa436&color=fff&size=100';">
+                    <img src=LOGOFESBUD1.png" alt="Logo Fesbud" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=FB&background=8aa436&color=fff&size=100';">
                 </div>
                 <div>
                     <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
@@ -150,25 +151,31 @@
                 </h3>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Opsi Iya -->
                     <label class="relative flex cursor-pointer items-center rounded-2xl border border-brand-border bg-brand-darker p-4 hover:bg-brand-border/50 transition-all group">
                         <input type="radio" name="kehadiran" value="Iya" class="peer sr-only" required onchange="toggleReason()">
-                        <div class="flex items-center gap-3 w-full">
-                            <div class="w-6 h-6 rounded-full border-2 border-gray-500 peer-checked:border-brand-accent peer-checked:bg-brand-accent flex items-center justify-center transition-all">
-                                <div class="w-2.5 h-2.5 rounded-full bg-brand-dark hidden peer-checked:block"></div>
-                            </div>
-                            <span class="text-gray-300 peer-checked:text-white peer-checked:font-semibold transition-colors">Iya, Saya Hadir</span>
-                        </div>
+                        
+                        <!-- Lingkaran & Titik Dalam -->
+                        <div class="w-6 h-6 rounded-full border-2 border-gray-500 peer-checked:border-brand-accent flex items-center justify-center transition-all mr-3 shrink-0 relative after:content-[''] after:w-3 after:h-3 after:bg-brand-accent after:rounded-full after:scale-0 peer-checked:after:scale-100 after:transition-transform"></div>
+                        
+                        <!-- Teks -->
+                        <span class="text-gray-300 peer-checked:text-white peer-checked:font-semibold transition-colors z-10 w-full">Iya, Saya Hadir</span>
+                        
+                        <!-- Border Aktif Keseluruhan -->
                         <div class="absolute inset-0 rounded-2xl border-2 border-transparent peer-checked:border-brand-accent pointer-events-none transition-colors"></div>
                     </label>
 
+                    <!-- Opsi Tidak -->
                     <label class="relative flex cursor-pointer items-center rounded-2xl border border-brand-border bg-brand-darker p-4 hover:bg-brand-border/50 transition-all group">
                         <input type="radio" name="kehadiran" value="Tidak" class="peer sr-only" onchange="toggleReason()">
-                        <div class="flex items-center gap-3 w-full">
-                            <div class="w-6 h-6 rounded-full border-2 border-gray-500 peer-checked:border-red-500 peer-checked:bg-red-500 flex items-center justify-center transition-all">
-                                <div class="w-2.5 h-2.5 rounded-full bg-brand-dark hidden peer-checked:block"></div>
-                            </div>
-                            <span class="text-gray-300 peer-checked:text-white peer-checked:font-semibold transition-colors">Tidak Hadir</span>
-                        </div>
+                        
+                        <!-- Lingkaran & Titik Dalam -->
+                        <div class="w-6 h-6 rounded-full border-2 border-gray-500 peer-checked:border-red-500 flex items-center justify-center transition-all mr-3 shrink-0 relative after:content-[''] after:w-3 after:h-3 after:bg-red-500 after:rounded-full after:scale-0 peer-checked:after:scale-100 after:transition-transform"></div>
+                        
+                        <!-- Teks -->
+                        <span class="text-gray-300 peer-checked:text-white peer-checked:font-semibold transition-colors z-10 w-full">Tidak Hadir</span>
+                        
+                        <!-- Border Aktif Keseluruhan -->
                         <div class="absolute inset-0 rounded-2xl border-2 border-transparent peer-checked:border-red-500 pointer-events-none transition-colors"></div>
                     </label>
                 </div>
