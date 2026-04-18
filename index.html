@@ -82,8 +82,9 @@
 
             <!-- Title & Logo -->
             <div class="flex items-start gap-4 mb-6">
-                <div class="w-[70px] h-[70px] shrink-0 rounded-full border-[3px] border-brand-accent bg-[#8aa436] flex items-center justify-center text-white font-bold text-xs text-center leading-tight shadow-lg">
-                    FESBUD<br>GRESIK
+                <div class="w-[70px] h-[70px] shrink-0 rounded-full border-[3px] border-brand-accent bg-[#8aa436] flex items-center justify-center text-white font-bold text-xs text-center leading-tight shadow-lg overflow-hidden">
+                    <!-- Pastikan file foto logo Anda bernama "logo.png" dan berada di folder yang sama -->
+                    <img src="LOGOFESBUD1.png" alt="Logo Fesbud" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=FB&background=8aa436&color=fff&size=100';">
                 </div>
                 <div>
                     <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
@@ -262,7 +263,7 @@
 
     <script>
         // --- KONFIGURASI ---
-        const APPS_SCRIPT_URL = "URL_GOOGLE_APPS_SCRIPT_ANDA_DISINI"; 
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwktccpoiBK9vs1YAeChyxheZ4jDvh8i6m0XdOF4GQkMQqlRMeKo5ZjWRiMh3UkJYDI/exec"; 
         
         // Ganti dengan nomor WA Panitia (Format harus 628... tanpa spasi/tanda plus)
         const NOMOR_WA_PANITIA = "6281234567890"; 
