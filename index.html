@@ -1,1 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Kehadiran Festival Budaya Gresik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#fdf8ec', // Beige background
+                            dark: '#1e3325', // Dark green card
+                            darker: '#142419', // Darker green for inputs
+                            accent: '#eab308', // Yellow/Gold
+                            border: '#2b4735' // Light green border
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fdf8ec;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d8cfba' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Smooth height transition for reason field */
+        .expandable {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        .expandable.show {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        
+        /* Custom Scrollbar for textarea */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: #142419; 
+            border-radius: 8px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: #2b4735; 
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-10 px-4 sm:px-6 lg:px-8 flex items-center justify-center font-sans">
 
+    <!-- Main Container -->
+    <div class="max-w-2xl w-full bg-brand-dark rounded-[2.5rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        
+        <!-- Decorative subtle glow -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+
+        <!-- Header Information (Like the image) -->
+        <div class="relative z-10 border-b border-brand-border pb-8">
+            <!-- Badges -->
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="bg-brand-accent text-brand-dark px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-sm">
+                    <i class="ph-fill ph-star"></i> Festival Terbesar 2026
+                </span>
+                <span class="bg-white text-brand-dark px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-sm">
+                    <i class="ph-fill ph-ticket"></i> Wajib Isi Form
+                </span>
+            </div>
+
+            <!-- Title & Logo -->
+            <div class="flex items-start gap-4 mb-6">
+                <div class="w-[70px] h-[70px] shrink-0 rounded-full border-[3px] border-brand-accent bg-[#8aa436] flex items-center justify-center text-white font-bold text-xs text-center leading-tight shadow-lg">
+                    FESBUD<br>GRESIK
+                </div>
+                <div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
+                        Festival Budaya<br>
+                        <span class="text-brand-accent">Gresik</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="space-y-3 pl-2">
+                <div class="flex items-center gap-3 text-white font-medium">
+                    <i class="ph-fill ph-calendar-blank text-brand-accent text-xl"></i>
+                    <span>3 Mei 2026</span>
+                </div>
+                <div class="flex items-center gap-3 text-white font-medium">
+                    <i class="ph-fill ph-clock text-brand-accent text-xl"></i>
+                    <span>07.00 - 12.00 WIB</span>
+                </div>
+                <div class="flex items-center gap-3 text-white font-medium">
+                    <i class="ph-fill ph-map-pin text-brand-accent text-xl"></i>
+                    <span>Anjungan Jawa Timur, TMII</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <form id="fesbudForm" class="mt-8 space-y-8 relative z-10">
+            
+            <!-- Personal Info Section -->
+            <div class="space-y-5">
+                <h3 class="text-lg font-bold text-brand-accent flex items-center gap-2">
+                    <i class="ph-fill ph-user-circle text-2xl"></i> Data Panitia
+                </h3>
+                
+                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <div>
+                        <label for="nama" class="block text-sm font-medium text-gray-300 mb-1.5">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" required class="block w-full px-4 py-3.5 rounded-2xl bg-brand-darker border border-brand-border text-white focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition-all outline-none placeholder-gray-500" placeholder="Masukkan nama...">
+                    </div>
+                    <div>
+                        <label for="angkatan" class="block text-sm font-medium text-gray-300 mb-1.5">Angkatan</label>
+                        <input type="number" id="angkatan" name="angkatan" required class="block w-full px-4 py-3.5 rounded-2xl bg-brand-darker border border-brand-border text-white focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition-all outline-none placeholder-gray-500" placeholder="Contoh: 2023">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <div>
+                        <label for="telepon" class="block text-sm font-medium text-gray-300 mb-1.5">Nomor Telepon (WA)</label>
+                        <input type="tel" id="telepon" name="telepon" required class="block w-full px-4 py-3.5 rounded-2xl bg-brand-darker border border-brand-border text-white focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition-all outline-none placeholder-gray-500" placeholder="08123456789">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1.5">Email</label>
+                        <input type="email" id="email" name="email" required class="block w-full px-4 py-3.5 rounded-2xl bg-brand-darker border border-brand-border text-white focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition-all outline-none placeholder-gray-500" placeholder="email@contoh.com">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Section -->
+            <div class="space-y-5">
+                <h3 class="text-lg font-bold text-brand-accent flex items-center gap-2">
+                    <i class="ph-fill ph-check-circle text-2xl"></i> Konfirmasi Kehadiran
+                </h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label class="relative flex cursor-pointer items-center rounded-2xl border border-brand-border bg-brand-darker p-4 hover:bg-brand-border/50 transition-all group">
+                        <input type="radio" name="kehadiran" value="Iya" class="peer sr-only" required onchange="toggleReason()">
+                        <div class="flex items-center gap-3 w-full">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-500 peer-checked:border-brand-accent peer-checked:bg-brand-accent flex items-center justify-center transition-all">
+                                <div class="w-2.5 h-2.5 rounded-full bg-brand-dark hidden peer-checked:block"></div>
+                            </div>
+                            <span class="text-gray-300 peer-checked:text-white peer-checked:font-semibold transition-colors">Iya, Saya Hadir</span>
+                        </div>
+                        <div class="absolute inset-0 rounded-2xl border-2 border-transparent peer-checked:border-brand-accent pointer-events-none transition-colors"></div>
+                    </label>
+
+                    <label class="relative flex cursor-pointer items-center rounded-2xl border border-brand-border bg-brand-darker p-4 hover:bg-brand-border/50 transition-all group">
+                        <input type="radio" name="kehadiran" value="Tidak" class="peer sr-only" onchange="toggleReason()">
+                        <div class="flex items-center gap-3 w-full">
+                            <div class="w-6 h-6 rounded-full border-2 border-gray-500 peer-checked:border-red-500 peer-checked:bg-red-500 flex items-center justify-center transition-all">
+                                <div class="w-2.5 h-2.5 rounded-full bg-brand-dark hidden peer-checked:block"></div>
+                            </div>
+                            <span class="text-gray-300 peer-checked:text-white peer-checked:font-semibold transition-colors">Tidak Hadir</span>
+                        </div>
+                        <div class="absolute inset-0 rounded-2xl border-2 border-transparent peer-checked:border-red-500 pointer-events-none transition-colors"></div>
+                    </label>
+                </div>
+
+                <!-- Reason Field -->
+                <div id="reasonContainer" class="expandable">
+                    <label for="alasan" class="block text-sm font-medium text-gray-300 mb-1.5">Alasan Tidak Hadir <span class="text-red-400">*</span></label>
+                    <textarea id="alasan" name="alasan" rows="3" class="block w-full px-4 py-3.5 rounded-2xl bg-brand-darker border border-brand-border text-white focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all outline-none resize-none placeholder-gray-500" placeholder="Mohon tuliskan alasan Anda..."></textarea>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="space-y-5">
+                <h3 class="text-lg font-bold text-brand-accent flex items-center gap-2">
+                    <i class="ph-fill ph-wallet text-2xl"></i> Kas Panitia
+                </h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Scan QRIS di bawah ini untuk kas kegiatan. <strong class="text-brand-accent">Bayar seikhlasnya!</strong> Jika sudah, silakan upload bukti transfernya.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center bg-brand-darker p-5 rounded-3xl border border-brand-border">
+                    <!-- QRIS Asli -->
+                    <div class="bg-white rounded-2xl p-4 text-center flex flex-col items-center justify-center border-2 border-brand-accent/30 overflow-hidden shadow-inner">
+                        <!-- Nama Pemilik QRIS -->
+                        <span class="text-[10px] font-extrabold text-gray-800 mb-2 text-center leading-tight uppercase">MOHAMMAD KHILMI AZIZI,<br>DIGITAL & KREATIF</span>
+                        
+                        <!-- Pastikan gambar QRIS Anda diberi nama "qris-fesbud.jpg" dan ditaruh di folder yang sama -->
+                        <img src="qris-fesbud.jpg" alt="QRIS Kas Fesbud" class="w-full max-w-[160px] h-auto object-contain rounded-lg border border-gray-100 p-1" onerror="this.onerror=null; this.src='https://quickchart.io/qr?text=00020101021126610014COM.GO-JEK.WWW01189360091434111889150210G4111889150303UMI51440014ID.CO.QRIS.WWW0215ID10265039027710303UMI5204899953033605802ID5925MOHAMMAD%20KHILMI%20AZIZI%2C%20Di6006GRESIK61056115562070703A0163048598&size=300&margin=0'; document.getElementById('dl-qris').href=this.src;">
+                        
+                        <span class="text-[9px] font-bold text-gray-500 mt-1 mb-3 text-center leading-tight">NMID: ID1026503902771</span>
+                        
+                        <!-- Tombol Download -->
+                        <a href="qris-fesbud.jpg" id="dl-qris" download="QRIS_Fesbud_Gresik.jpg" class="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-100 hover:bg-brand-accent text-gray-700 hover:text-brand-dark rounded-xl text-xs font-bold transition-all border border-gray-200">
+                            <i class="ph-bold ph-download-simple text-sm"></i> Download QRIS
+                        </a>
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="w-full">
+                        <label for="bukti_bayar" class="flex flex-col items-center justify-center w-full h-full min-h-[140px] border-2 border-brand-border border-dashed rounded-2xl cursor-pointer hover:bg-brand-border/30 transition-colors">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
+                                <i class="ph ph-upload-simple text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-300 mb-1"><span class="font-semibold text-brand-accent">Upload Foto</span> Bukti</p>
+                                <p id="fileName" class="text-xs text-gray-500 truncate w-full max-w-[180px]">Format: JPG, PNG (Max 2MB)</p>
+                            </div>
+                            <input id="bukti_bayar" type="file" accept="image/*" class="hidden" onchange="handleFile(this)" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button (Styled like the reference image) -->
+            <div class="pt-6">
+                <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-brand-dark border-2 border-brand-accent hover:bg-brand-accent text-brand-accent hover:text-brand-dark px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center sm:justify-between gap-4 transition-all duration-300 group">
+                    <span>Kirim Konfirmasi</span>
+                    <div class="w-8 h-8 rounded-full bg-brand-accent text-brand-dark group-hover:bg-brand-dark group-hover:text-brand-accent flex items-center justify-center transition-colors">
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-brand-bg/80 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-brand-dark"></div>
+            <p class="mt-4 text-lg font-bold text-brand-dark">Mengirim Data...</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-brand-dark border border-brand-border rounded-[2rem] p-8 max-w-md w-full text-center shadow-2xl transform scale-95 opacity-0 transition-all duration-300 relative overflow-hidden" id="modalContent">
+            
+            <div class="w-20 h-20 bg-brand-accent/20 rounded-full flex items-center justify-center mx-auto mb-5 border-4 border-brand-dark outline outline-2 outline-brand-accent z-10 relative">
+                <i class="ph-fill ph-check-circle text-5xl text-brand-accent"></i>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-white mb-2 relative z-10">Data Berhasil Dikirim!</h3>
+            <p class="text-gray-300 mb-8 relative z-10">Terima kasih telah mengisi konfirmasi kehadiran. Silakan klik tombol di bawah untuk konfirmasi ke WhatsApp Panitia.</p>
+            
+            <div class="space-y-3 relative z-10">
+                <!-- WA Button -->
+                <a href="#" id="waBtn" target="_blank" class="w-full flex items-center justify-center gap-2 py-4 px-4 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-xl font-bold text-lg transition-colors shadow-lg shadow-green-900/20">
+                    <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+                    Konfirmasi via WhatsApp
+                </a>
+                
+                <button onclick="closeModal()" class="w-full py-3 px-4 bg-transparent border border-brand-border text-gray-300 rounded-xl font-medium hover:bg-brand-border/50 transition-colors">Tutup Jendela</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- KONFIGURASI ---
+        const APPS_SCRIPT_URL = "URL_GOOGLE_APPS_SCRIPT_ANDA_DISINI"; 
+        
+        // Ganti dengan nomor WA Panitia (Format harus 628... tanpa spasi/tanda plus)
+        const NOMOR_WA_PANITIA = "6281234567890"; 
+        // -------------------
+
+        let fileBase64 = null;
+        let fileMimeType = null;
+        let originalFileName = null;
+
+        function toggleReason() {
+            const container = document.getElementById('reasonContainer');
+            const alasanInput = document.getElementById('alasan');
+            const isTidak = document.querySelector('input[name="kehadiran"][value="Tidak"]').checked;
+            
+            if (isTidak) {
+                container.classList.add('show');
+                alasanInput.required = true;
+            } else {
+                container.classList.remove('show');
+                alasanInput.required = false;
+                alasanInput.value = '';
+            }
+        }
+
+        function handleFile(input) {
+            const file = input.files[0];
+            const nameDisplay = document.getElementById('fileName');
+            
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert("Ukuran file terlalu besar! Maksimal 2MB.");
+                    input.value = "";
+                    nameDisplay.innerText = "Format: JPG, PNG (Max 2MB)";
+                    return;
+                }
+
+                nameDisplay.innerText = file.name;
+                nameDisplay.classList.add("text-brand-accent", "font-medium");
+                nameDisplay.classList.remove("text-gray-500");
+                
+                originalFileName = file.name;
+                fileMimeType = file.type;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    fileBase64 = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                nameDisplay.innerText = "Format: JPG, PNG (Max 2MB)";
+                nameDisplay.classList.add("text-gray-500");
+                nameDisplay.classList.remove("text-brand-accent", "font-medium");
+                fileBase64 = null;
+            }
+        }
+
+        document.getElementById('fesbudForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            document.getElementById('loadingOverlay').classList.add('flex');
+
+            const formData = {
+                nama: document.getElementById('nama').value,
+                angkatan: document.getElementById('angkatan').value,
+                telepon: document.getElementById('telepon').value,
+                email: document.getElementById('email').value,
+                kehadiran: document.querySelector('input[name="kehadiran"]:checked').value,
+                alasan: document.getElementById('alasan').value || "-",
+                fileBase64: fileBase64,
+                fileName: originalFileName,
+                mimeType: fileMimeType
+            };
+
+            try {
+                if (APPS_SCRIPT_URL !== "URL_GOOGLE_APPS_SCRIPT_ANDA_DISINI") {
+                    await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(formData)
+                    });
+                } else {
+                    // Simulate delay if URL is not configured
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                }
+
+                showSuccessModal(formData);
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Terjadi kesalahan saat mengirim data. Pastikan koneksi internet stabil.");
+            } finally {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                document.getElementById('loadingOverlay').classList.remove('flex');
+            }
+        });
+
+        function showSuccessModal(data) {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            const waBtn = document.getElementById('waBtn');
+            
+            // Generate WhatsApp Link
+            const waText = `Halo Panitia, saya *${data.nama}* (Angkatan ${data.angkatan}) telah mengisi form konfirmasi kehadiran Fesbud.\n\nStatus: *${data.kehadiran}*\n${data.kehadiran === 'Tidak' ? `Alasan: ${data.alasan}\n` : ''}\nTerima kasih!`;
+            const waUrl = `https://wa.me/${NOMOR_WA_PANITIA}?text=${encodeURIComponent(waText)}`;
+            waBtn.href = waUrl;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            // Reset Form
+            document.getElementById('fesbudForm').reset();
+            document.getElementById('reasonContainer').classList.remove('show');
+            document.getElementById('fileName').innerText = "Format: JPG, PNG (Max 2MB)";
+            fileBase64 = null;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
