@@ -69,7 +69,7 @@
         <!-- Decorative subtle glow -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
 
-        <!-- Header Information (Like the image) -->
+        <!-- Header Information -->
         <div class="relative z-10 border-b border-brand-border pb-8">
             <!-- Badges -->
             <div class="flex flex-wrap gap-3 mb-6">
@@ -83,13 +83,14 @@
 
             <!-- Title & Logo -->
             <div class="flex items-start gap-4 mb-6">
-                <div class="w-[70px] h-[70px] shrink-0 rounded-full border-[3px] border-brand-accent bg-[#8aa436] flex items-center justify-center text-white font-bold text-xs text-center leading-tight shadow-lg overflow-hidden">
-                    <!-- Pastikan file foto logo Anda bernama "logo.png" dan berada di folder yang sama -->
-                    <img src=LOGOFESBUD1.png" alt="Logo Fesbud" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=FB&background=8aa436&color=fff&size=100';">
+                <!-- Ukuran logo diperkecil di HP (w-60px) agar muat untuk teks judul -->
+                <div class="w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] shrink-0 rounded-full border-[3px] border-brand-accent bg-[#8aa436] flex items-center justify-center text-white font-bold text-xs text-center leading-tight shadow-lg overflow-hidden">
+                    <img src="LOGOFESBUD1.png" alt="Logo Fesbud" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=FB&background=8aa436&color=fff&size=100';">
                 </div>
                 <div>
-                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
-                        Festival Budaya<br>
+                    <!-- Menambahkan whitespace-nowrap agar Festival Budaya tidak memisah baris -->
+                    <h1 class="text-[26px] sm:text-4xl font-extrabold text-white leading-tight tracking-tight">
+                        <span class="whitespace-nowrap">Festival Budaya</span><br>
                         <span class="text-brand-accent">Gresik</span>
                     </h1>
                 </div>
@@ -225,9 +226,9 @@
                 </div>
             </div>
 
-            <!-- Submit Button (Styled like the reference image) -->
-            <div class="pt-6">
-                <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-brand-dark border-2 border-brand-accent hover:bg-brand-accent text-brand-accent hover:text-brand-dark px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center sm:justify-between gap-4 transition-all duration-300 group">
+            <!-- Submit Button Ditengah -->
+            <div class="pt-6 flex justify-center">
+                <button type="submit" id="submitBtn" class="w-auto bg-brand-dark border-2 border-brand-accent hover:bg-brand-accent text-brand-accent hover:text-brand-dark px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-4 transition-all duration-300 group">
                     <span>Kirim Konfirmasi</span>
                     <div class="w-8 h-8 rounded-full bg-brand-accent text-brand-dark group-hover:bg-brand-dark group-hover:text-brand-accent flex items-center justify-center transition-colors">
                         <i class="ph-bold ph-arrow-right"></i>
