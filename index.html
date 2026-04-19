@@ -195,7 +195,7 @@
                 <h3 class="text-lg font-bold text-brand-accent flex items-center gap-2">
                     <i class="ph-fill ph-wallet text-2xl"></i> Kas Panitia
                 </h3>
-                <p class="text-sm text-gray-400 leading-relaxed">Scan QRIS di bawah ini untuk membantu kas kegiatan <strong class="text-brand-accent">Seikhlasnya!</strong> Jika sudah, silakan upload bukti transfernya.</p>
+                <p class="text-sm text-gray-400 leading-relaxed">Scan QRIS di bawah ini untuk membantu kas kegiatan <strong class="text-brand-accent">Seikhlasnya!</strong> Jika sudah, silakan upload bukti transfernya. <span class="text-red-400 font-bold">*</span></p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center bg-brand-darker p-5 rounded-3xl border border-brand-border">
                     <!-- QRIS Area -->
@@ -380,6 +380,14 @@
 
         document.getElementById('fesbudForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            // --- TAMBAHKAN KODE BLOK INI ---
+            // Cek apakah file bukti bayar sudah diupload
+            if (!fileBase64) {
+                alert("Harap upload foto bukti transfer terlebih dahulu sebelum mengirim!");
+                return; // Menghentikan proses submit
+            }
+            // -------------------------------
 
             document.getElementById('loadingOverlay').classList.remove('hidden');
             document.getElementById('loadingOverlay').classList.add('flex');
